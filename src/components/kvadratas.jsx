@@ -1,11 +1,19 @@
 
+import Bebras from './bebras'
+
 function Kvadratas(props) {
-    
-return (
-    <div className="kvadratas">
-        <span>{props.bebras}</span>
-    </div>
+    if ('Brigadinis' == props.bebras) {
+        return (
+            <div className="kvadratas br">
+                <Bebras bebras={props.bebras} />
+            </div>
+        );
+    }
+
+    return (
+        <div className="kvadratas">
+            <Bebras bebras={props.bebras} />
+        </div>
     );
 }
-
 export default Kvadratas;

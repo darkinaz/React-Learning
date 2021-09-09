@@ -12,14 +12,18 @@ code {
     monospace;
 }
 .kvadratas {
-  width: 123px;
-  height: 123px;
+  width: 150px;
+  height: 150px;
   background-color: pink;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 40px;
   span {
-    font-size: 30px;
+    font-size: 25px;
+  }
+  &.br {
+    background-color: rgb(58, 228, 171);
+     
   }
 }
