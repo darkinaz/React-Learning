@@ -1,12 +1,42 @@
-import Kvadratas from './kvadratas';
+import React from 'react';
 
-const data = ['Rudasis', 'Baltas', 'Brigadinis'];
-function App() {
-    return (<>
-        {data.map((b,i) => <Kvadratas key={i} bebras={b} />)}
+import ChangeColorButton from './changeColorButton';
 
+class App extends React.Component {
 
-    </>);
+    constructor() {
+        super();
+        this.state = {bg: 'palegreen'};
+    }
+
+    changeColor = () => {
+        // this.setState({
+        //     bg: 'orangered',
+        // });
+        this.setState(state => {
+
+            let color;
+            if (state.bg == 'palegreen') {
+                color = 'orangered';
+            }
+            else if (state.bg == 'orangered') {
+                color = 'palegreen';
+            }
+
+            return(
+                {bg: color}
+                )
+            });
+
+    }
+
+    render() {
+        return (
+            <div className="circle" style={{backgroundColor: this.state.bg}}>
+                <ChangeColorButton clickToChangeColor={this.changeColor}></ChangeColorButton>
+            </div>
+        );
+    }
 }
-
+    
 export default App;
