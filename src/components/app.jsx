@@ -1,61 +1,58 @@
 import React from 'react';
+import SmallCow from './smallCow';
 
-import ChangeColorButton from './changeColorButton';
+
 
 class App extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            bg: 'palegreen',
-            in: ''
+            cows: [],
+            cowInput: '',
+
         };
     }
-
-    changeColorP = () => {
+    addCow = () => {
+        const cow = { color: this.state.cowInput };
+        const cows = this.state.cows.slice();
+        // this.setState(state => ({ cows: state.cows.slice().push(cow) }));
+        cows.push(cow);
         this.setState({
-            bg: 'palegreen',
+            cows: cows
+        })
+        localStorage.setItem('AllCows', JSON.stringify(cows));
+    }
+
+    // doColor = (e) => {
+    //     this.setState({
+    //         cowInput: e.target.value,
+    //     });
+    // }
+    cowInputHandler = (e) => {
+        this.setState({
+            cowInput: e.target.value,
         });
     }
-
-    changeColorO = () => {
+    componentDidMount() {
+        const cows = JSON.parse(localStorage.getItem('AllCows'));
+        if (null === cows) {
+            return;
+        }
         this.setState({
-            bg: 'orangered',
-        });
+            cows: cows
+        })
     }
-
-    changeColorG = () => {
-        this.setState({
-            bg: 'greenyellow',
-        });
-    }
-
-    changeColor = (color) => {
-        this.setState({
-            bg: color,
-        });
-    }
-
-    inChange = (e) => {
-        this.setState({
-            in: e.target.value,
-        });
-    }
-
-    doColor = () => {
-        this.setState(state => ({ bg: state.in }));
-    }
-
 
     render() {
         return (
-            <div className="circle" style={{backgroundColor: this.state.bg}}>
-                <ChangeColorButton regNumber={23} color={'palegreen'} clickToChangeColor={this.changeColor}></ChangeColorButton>
-                <ChangeColorButton regNumber={53} color={'orangered'} clickToChangeColor={this.changeColor}></ChangeColorButton>
-                <ChangeColorButton regNumber={77} color={'greenyellow'} clickToChangeColor={this.changeColor}></ChangeColorButton>
-                <input type="text" value={this.state.in} onChange={this.inChange}/>
-                <button className="input-button" onClick={this.doColor}>Change Color</button>
-            </div>
+            <>
+                {this.state.cows.map((b, i) => <SmallCow key={i} color={b.color} />)}
+                <div>
+                    <input type="text" value={this.state.cowInput} onChange={this.cowInputHandler}></input>
+                    <button className="input-button" onClick={this.addCow}>Add Cow</button>
+                </div>
+            </>
         );
     }
 }

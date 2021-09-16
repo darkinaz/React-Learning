@@ -116,21 +116,20 @@ code {
   align-items: center;
   position: relative;
   input {
-      position: absolute;
       top: 40px;
       font-size: 20px;
       outline: none;
       border: none;
       text-align: center;
+      margin: 5px;
   }
   .input-button {
-      position: absolute;
-      top: 90px;
+    margin: 5px;
+
+      // position: absolute;
+      // top: 90px;
   }
-  .input-squar {
-    position: relative;
-    right: 90px;
-  }
+
 }
 
 button {
@@ -149,4 +148,13 @@ button {
       right: 5px;
       font-size: 10px;
   }
+}
+.small-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
