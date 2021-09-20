@@ -1,11 +1,13 @@
 import React from 'react'
+import CountDisplay from './countDisplay';
+import Mygtukas2 from './mygtukas2';
 
 
 
 class Mygtukas extends React.Component {
     constructor() {
         super();
-        this.state = { counter: 0 };
+        this.state = { counter: 3 };
         // this.tick = this.tick.bind(this);
     }
     activateLasers(e) {
@@ -20,19 +22,24 @@ class Mygtukas extends React.Component {
         this.setState((state, props) => ({
             counter: state.counter + props.amount
         }));
-        console.log(`Lazeriai ${this.props.textas} aktyvuoti`);
+        // console.log(`Lazeriai ${this.props.textas} aktyvuoti`);
 
     }
     valio(e) {
-        console.log('Valio', this.props.textas);
+        // console.log('Valio', this.props.textas);
     }
     // tick() {
     //     this.setState({ date: new Date() });
     // }
 
     componentDidMount() {
-
-
+        const data = JSON.parse(localStorage.getItem('Spausk'));
+        if (null === data) {
+            return;
+        }
+        this.setState({
+            data: data
+        })
     }
 
     componentWillUnmount() {
