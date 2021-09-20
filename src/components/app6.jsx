@@ -51,7 +51,7 @@ class App extends React.Component {
                 borderRadius: this.state.shapeSquar ? '0' :'50%'     
                 }}>
                 <div>
-                    <input type="text" value={this.state.bgIn} onChange={this.inChangeColor} />
+                    <input type="text" value={this.state.bgIn} onChange={this.inChangeColor}/>
                     <button className="input-button" onClick={this.doColor}>Change Color</button>
                 </div>
                 <div>

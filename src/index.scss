@@ -116,7 +116,6 @@ code {
   align-items: center;
   position: relative;
   input {
-      top: 40px;
       font-size: 20px;
       outline: none;
       border: none;
@@ -124,12 +123,8 @@ code {
       margin: 5px;
   }
   .input-button {
-    margin: 5px;
-
-      // position: absolute;
-      // top: 90px;
+      margin: 5px;
   }
-
 }
 
 button {
@@ -142,6 +137,14 @@ button {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+  margin: 5px;
+  &.input-button-small {
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: white;
+      background-color: rgb(205, 63, 110);
+      padding: 8px;
+  }
   .reg {
       position: absolute;
       bottom: 5px;
@@ -149,12 +152,29 @@ button {
       font-size: 10px;
   }
 }
+
 .small-circle {
-  width: 120px;
-  height: 120px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-direction: column;
+  margin: 5px;
+  span {
+      font-size: 27px;
+      letter-spacing: 2px;
+      color: black;
+      padding: 16px;
+  }
+  .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      input {
+          width: 100px;
+      }
+  }
 }
