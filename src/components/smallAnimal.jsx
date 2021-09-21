@@ -18,7 +18,7 @@ class SmallAnimal extends React.Component {
         return (
         <div className="small-circle" style={{
             backgroundColor: this.props.color,
-            borderRadius: this.props.animal == 'cow' ? '50%' : '5px'
+            borderRadius: this.props.animal === 'cow' ? '50%' : '5px'
         }}>
             <span>{this.props.color}</span>
             <button className="input-button-small" onClick={()=>this.props.delete(this.props.id)}>Go Home</button>
