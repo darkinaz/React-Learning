@@ -1,80 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import SmallAnimal from './smallAnimalF';
-import getId from '../Shared/id';
+import axios from 'axios';
+import Todo from './toDo';
 function App() {
 
+    const [todos, setTodos] = useState([]);
 
-
-    const [animals, setAnimals] = useState([]);
-    const [cowInput, setCowInput] = useState('');
-
-    useEffect(() => {
-
-        const animalsCopy = JSON.parse(localStorage.getItem('allAnimals'));
-        if (null === animalsCopy) {
-            return;
-        }
-        setAnimals(animalsCopy);
-
+    useEffect(()=>{
+        console.log('Start');
+        axios.get('https://jsonplaceholder.typicode.com/todos')
+        .then(function (response) {
+            console.log(response.data);
+            setTodos(response.data);
+        })
     }, []);
 
-    const addAnimal = (a) => {
-        const animal = { id: getId(), color: cowInput, animal: a };
-        const animalsCopy = animals.slice();
-        animalsCopy.push(animal);
-        setAnimals(animalsCopy);
-        localStorage.setItem('allAnimals', JSON.stringify(animalsCopy));
-    }
-
-    const deleteAnimal = (id) => {
-        const animalsCopy = animals.slice();
-        for (let i = 0; i < animalsCopy.length; i++) {
-            if (animalsCopy[i].id == id) {
-                animalsCopy.splice(i, 1);
+    const sniuriukasTodui = (id) => {
+        const todosCopy = todos.slice();
+        for (let i = 0; i < todosCopy.length; i++) {
+            if (id === todosCopy[i].id) {
+                todosCopy[i].completed = !todosCopy[i].completed;
                 break;
             }
         }
-        setAnimals(animalsCopy);
-        localStorage.setItem('allAnimals', JSON.stringify(animalsCopy));
+        setTodos(todosCopy);
     }
 
-    const editAnimal = (id, color) => {
-        const animalsCopy = animals.slice();
-        for (let i = 0; i < animalsCopy.length; i++) {
-            if (animalsCopy[i].id == id) {
-                animalsCopy[i].color = color;
-                break;
-            }
-        }
-        setAnimals(animalsCopy);
-        localStorage.setItem('allAnimals', JSON.stringify(animalsCopy));
+    return (<div className="todo-container">
+        {todos.map((todo)=>(<Todo key={todo.id} data={todo} sniuriukas={sniuriukasTodui}></Todo>))}
+    </div>);
     }
-
-    const cowInputHandler = (e) => {
-        setCowInput(e.target.value);
-    }
-
-    // componentDidMount() {
-    //     const animals = JSON.parse(localStorage.getItem('allAnimals'));
-    //     if (null === animals) {
-    //         return;
-    //     }
-    //     this.useState({
-    //         animals: animals
-    //     })
-    // }
-
-    return (
-        <>
-            {animals.map(b => <SmallAnimal key={b.id} delete={deleteAnimal} edit={editAnimal} id={b.id} color={b.color} animal={b.animal} />)}
-            <div>
-                <input type="text" value={cowInput} onChange={cowInputHandler} />
-                <button className="input-button" onClick={() => addAnimal('cow')}>Add Cow</button>
-                <button className="input-button" onClick={() => addAnimal('sheep')}>Add Sheep</button>
-            </div>
-        </>
-    );
-
-}
-
 export default App;
