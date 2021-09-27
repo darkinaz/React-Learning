@@ -294,3 +294,11 @@ button {
   padding: 5px;
   background-color: sandybrown;
 }
+a {
+  text-decoration: none;
+  color: aqua;
+  transition: all .3s;
+  &:hover {
+    color: blue;
+  }
+}
