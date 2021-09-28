@@ -1,11 +1,50 @@
-import Zoo from './zoo';
-import { BrowserRouter as Router}  from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
+import axios from 'axios';
+import TodoOne from './toDoOne';
+import Todo from './toDo'
+
 
 function App() {
-return (<Router>
-    
-    <Zoo></Zoo>
-    </Router>);
+
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        console.log('Start');
+        axios.get('https://jsonplaceholder.typicode.com/todos')
+            .then(function (response) {
+                console.log(response.data);
+                setTodos(response.data);
+            })
+    }, []);
+
+    const sniuriukasTodui = (id) => {
+        const todosCopy = todos.slice();
+        for (let i = 0; i < todosCopy.length; i++) {
+            if (id === todosCopy[i].id) {
+                todosCopy[i].completed = !todosCopy[i].completed;
+                break;
+            }
+        }
+        setTodos(todosCopy);
+    }
+
+    return (
+        <Router>
+            <Switch>
+                <Route path={'/:todoId'}>
+                    <div className="todo-container">
+                        <TodoOne todos={todos} sniuriukas={sniuriukasTodui}></TodoOne>
+                    </div>
+                </Route>
+                <Route path='/'>
+                    <div className="todo-container">
+                        {todos.map((todo) => (<Todo key={todo.id} data={todo} sniuriukas={sniuriukasTodui}></Todo>))}
+                    </div>
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
