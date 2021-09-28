@@ -1,10 +1,12 @@
-import Zoo from './zoo';
+
+
+import LinkuMiskas from './linkForest';
 import { BrowserRouter as Router}  from 'react-router-dom'
 
-function App() {
+function App(props) {
 return (<Router>
     
-    <Zoo></Zoo>
+    <LinkuMiskas></LinkuMiskas>
     </Router>);
 }
 
